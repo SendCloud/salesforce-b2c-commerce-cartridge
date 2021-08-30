@@ -1,0 +1,207 @@
+{
+    "step-types": {
+        "script-module-step": [
+            {
+                "@type-id": "custom.Sendcloud.ExportOrders",
+                "@supports-parallel-execution": "true",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Exports orders to Sendcloud.",
+                "module": "int_sendcloud/cartridge/scripts/jobsteps/exportOrders.js",
+                "function": "exportOrders",
+                "transactional": "false",
+                "timeout-in-seconds": "900",
+                "parameters": {
+                    "parameters": [
+                        {
+                            "@name": "disabled",
+                            "@type": "boolean",
+                            "@required": "true",
+                            "description": "Used to disable this step",
+                            "default-value": "false"
+                        },
+                        {
+                            "@name": "orderAgeDaysLimit",
+                            "@type": "long",
+                            "@required": "true",
+                            "description": "Number of days in the past that an order has been created to be eligable for export",
+                            "default-value": "30",
+                            "min-value": "0"
+                        },
+                        {
+                            "@name": "batchSize",
+                            "@type": "long",
+                            "@required": "true",
+                            "description": "Number of orders to be exported to Sendcloud in one batch",
+                            "default-value": "10",
+                            "min-value": "1",
+                            "max-value": "100"
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status": [
+                        {
+                            "@code": "OK",
+                            "description": "Orders exported successfully"
+                        },
+                        {
+                            "@code": "WARN",
+                            "description": "Orders could not be exported"
+                        },
+                        {
+                            "@code": "ERROR",
+                            "description": "Error occurred during exporting of orders"
+                        },
+                        {
+                            "@code": "DISABLED",
+                            "description": "Job step is disabled"
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.Sendcloud.ProcessNotifications",
+                "@supports-parallel-execution": "true",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Processes the Sendcloud notification.",
+                "module": "int_sendcloud/cartridge/scripts/jobsteps/notifications.js",
+                "function": "processNotifications",
+                "transactional": "false",
+                "timeout-in-seconds": "300",
+                "parameters": {
+                    "parameters": [
+                        {
+                            "@name": "disabled",
+                            "@type": "boolean",
+                            "@required": "true",
+                            "description": "Used to disable this step",
+                            "default-value": "false"
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status": [
+                        {
+                            "@code": "UPDATE_CHECKOUT_CONFIGURATION",
+                            "description": "Checout configuration needs to be updated in next job steps"
+                        },
+                        {
+                            "@code": "OK",
+                            "description": "Notifications processed successfully"
+                        },
+                        {
+                            "@code": "WARN",
+                            "description": "Notifications could not be processed"
+                        },
+                        {
+                            "@code": "ERROR",
+                            "description": "Error occurred suring processing of Notifications"
+                        },
+                        {
+                            "@code": "DISABLED",
+                            "description": "Job step is disabled"
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.Sendcloud.GenerateSendcloudShippingXml",
+                "@supports-parallel-execution": "true",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Generatess new XML files: one with new and updates shipping methods and one with only the Sendcloud shipping methods that should be deleted.",
+                "module": "int_sendcloud/cartridge/scripts/jobsteps/generateSendcloudShippingXml.js",
+                "function": "processShippingXml",
+                "transactional": "false",
+                "timeout-in-seconds": "900",
+                "parameters": {
+                    "parameters": [
+                        {
+                            "@name": "disabled",
+                            "@type": "boolean",
+                            "@required": "true",
+                            "description": "Used to disable this step",
+                            "default-value": "false"
+                        },
+                        {
+                            "@name": "exportFolderPath",
+                            "@type": "string",
+                            "@required": "true",
+                            "@trim": "true",
+                            "description": "Path to the folder where shipping method XML files will be written, relative to IMPEX/src"
+                        },
+                        {
+                            "@name": "existingShippingFileName",
+                            "@type": "string",
+                            "@required": "true",
+                            "@trim": "true",
+                            "description": "Name of the existing XML file with existing shipping methods"
+                        },
+                        {
+                            "@name": "newShippingFileName",
+                            "@type": "string",
+                            "@required": "true",
+                            "@trim": "true",
+                            "description": "Name of the new XML file with new/updates shipping methods"
+                        },
+                        {
+                            "@name": "deleteShippingFileName",
+                            "@type": "string",
+                            "@required": "true",
+                            "@trim": "true",
+                            "description": "Name of the new XML file with shipping methods to be deleted"
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status": [
+                        {
+                            "@code": "OK",
+                            "description": "Shipping XML file processed successfully"
+                        },
+                        {
+                            "@code": "ERROR",
+                            "description": "Error occurred suring processing shipping XML file"
+                        },
+                        {
+                            "@code": "DISABLED",
+                            "description": "Job step is disabled"
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.Sendcloud.StatusFromContext",
+                "@supports-parallel-execution": "true",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Returns the status from the job execution context.",
+                "module": "int_sendcloud/cartridge/scripts/jobsteps/statusFromContext.js",
+                "function": "statusFromContext",
+                "transactional": "false",
+                "timeout-in-seconds": "30",
+                "parameters": {
+                    "parameters": []
+                },
+                "status-codes": {
+                    "status": [
+                        {
+                            "@code": "OK",
+                            "description": "Jobs ends successfully."
+                        },
+                        {
+                            "@code": "WARN",
+                            "description": "Job ends with warning."
+                        },
+                        {
+                            "@code": "ERROR",
+                            "description": "Job ends with an error."
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,12 @@
+<div class="selected-point-address">
+    <p class="point-address-label">${Resource.msg('shipping.pointpicker.address.label', 'pointpicker', null)}</p>
+    <p>
+        <p class="mb-0">
+            <span class="point-address-name-label">${Resource.msg('summary.label.servicepoint', 'sendcloud', null)}</span>
+            <span class="point-address-name"></span>
+        </p>
+        <p class="point-address-street mb-0"></p>
+        <p class="point-address-post-number mb-0"></p>
+        <p class="point-address-phone"></p>
+    </p>
+</div>

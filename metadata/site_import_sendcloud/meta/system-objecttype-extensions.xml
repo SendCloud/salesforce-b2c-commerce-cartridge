@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="Order">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="sendcloudExportStatus">
+                <display-name xml:lang="x-default">Sendcloud export status</display-name>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Not exported</display>
+                        <value>NOTEXPORTED</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Exported</display>
+                        <value>EXPORTED</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Export failed</display>
+                        <value>FAILED</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudFailedAttempts">
+                <display-name xml:lang="x-default">Sendcloud failed export attempts</display-name>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Sendcloud">
+                <display-name xml:lang="x-default">Sendcloud</display-name>
+                <attribute attribute-id="sendcloudExportStatus"/>
+                <attribute attribute-id="sendcloudFailedAttempts"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Product">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="countryOfOrigin">
+                <display-name xml:lang="x-default">Country of origin</display-name>
+                <description xml:lang="x-default">ISO-2 code of the country where this product was originally produced.</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="hsCode">
+                <display-name xml:lang="x-default">Harmonized System Code</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="weight">
+                <display-name xml:lang="x-default">Weight (kilograms)</display-name>
+                <type>double</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Sendcloud">
+                <display-name xml:lang="x-default">Sendcloud</display-name>
+                <attribute attribute-id="countryOfOrigin"/>
+                <attribute attribute-id="hsCode"/>
+                <attribute attribute-id="weight"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Shipment">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="sendcloudDeliveryDate">
+                <display-name xml:lang="x-default">Delivery date</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudDeliveryDateFormatted">
+                <display-name xml:lang="x-default">Formatted delivery date</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudDeliveryMethodType">
+                <display-name xml:lang="x-default">Delivery method type</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudParcelHandoverDate">
+                <display-name xml:lang="x-default">Parcel handover date</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudParcelHandoverDateFormatted">
+                <display-name xml:lang="x-default">Formatted parcel handover date</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudSenderAddressID">
+                <display-name xml:lang="x-default">Sendcloud sender address ID</display-name>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudServicePointData">
+                <display-name xml:lang="x-default">Sencloud service point data</display-name>
+                <description xml:lang="x-default">Complete JSON data returned from the service point picker</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-length>0</field-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudPostNumber">
+                <display-name xml:lang="x-default">Sendcloud post number</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-length>0</field-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudServicePointId">
+                <display-name xml:lang="x-default">Sendcloud service point ID</display-name>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudShipmentUUID">
+                <display-name xml:lang="x-default">Sendcloud shipment UUID</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudShippingMethodName">
+                <display-name xml:lang="x-default">Sendcloud shipping method name</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudShippingProductCode">
+                <display-name xml:lang="x-default">Sendcloud shipping product - code</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudShippingProductFunctionalities">
+                <display-name xml:lang="x-default">Sendcloud shipping product - selected functionalities</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudShippingProductName">
+                <display-name xml:lang="x-default">Sendcloud shipping product - name</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudStatus">
+                <display-name xml:lang="x-default">Shipping status</display-name>
+                <type>enum-of-int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Announced</display>
+                        <value>1</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">En route to sorting center</display>
+                        <value>3</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Delivery delayed</display>
+                        <value>4</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Sorted</display>
+                        <value>5</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Not sorted</display>
+                        <value>6</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Being sorted</display>
+                        <value>7</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Delivery attempt failed</display>
+                        <value>8</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Delivered</display>
+                        <value>11</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Awaiting customer pickup</display>
+                        <value>12</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Announced: not collected</display>
+                        <value>13</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Error collecting</display>
+                        <value>15</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Shipment picked up by driver</display>
+                        <value>22</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Unable to deliver</display>
+                        <value>80</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Parcel en route</display>
+                        <value>91</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Driver en route</display>
+                        <value>92</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Shipment collected by customer</display>
+                        <value>93</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">No label</display>
+                        <value>999</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Ready to send</display>
+                        <value>1000</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Being announced</display>
+                        <value>1001</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Announcement failed</display>
+                        <value>1002</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Unknown status - check carrier track &amp; trace page for more insights</display>
+                        <value>1337</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Cancelled upstream</display>
+                        <value>1998</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Cancellation requested</display>
+                        <value>1999</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Cancelled</display>
+                        <value>2000</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Submitting cancellation request</display>
+                        <value>2001</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">At Customs</display>
+                        <value>62989</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">At sorting centre</display>
+                        <value>62990</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Refused by recipient</display>
+                        <value>62991</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Returned to sender</display>
+                        <value>62992</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Delivery method changed</display>
+                        <value>62993</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Delivery date changed</display>
+                        <value>62994</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Delivery address changed</display>
+                        <value>62995</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Exception</display>
+                        <value>62996</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Address invalid</display>
+                        <value>62997</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudTrackingNumber">
+                <display-name xml:lang="x-default">Tracking number</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudTrackingUrl">
+                <display-name xml:lang="x-default">Tracking URL</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Sendcloud">
+                <display-name xml:lang="x-default">Sendcloud</display-name>
+                <attribute attribute-id="sendcloudShippingMethodName"/>
+                <attribute attribute-id="sendcloudServicePointId" />
+                <attribute attribute-id="sendcloudServicePointData"/>
+                <attribute attribute-id="sendcloudPostNumber" />
+                <attribute attribute-id="sendcloudShipmentUUID"/>
+                <attribute attribute-id="sendcloudStatus"/>
+                <attribute attribute-id="sendcloudTrackingNumber"/>
+                <attribute attribute-id="sendcloudTrackingUrl"/>
+            </attribute-group>
+            <attribute-group group-id="Sendcloud Checkout">
+                <display-name xml:lang="x-default">Sendcloud Checkout</display-name>
+                <attribute attribute-id="sendcloudDeliveryMethodType"/>
+                <attribute attribute-id="sendcloudShippingProductCode"/>
+                <attribute attribute-id="sendcloudShippingProductName"/>
+                <attribute attribute-id="sendcloudShippingProductFunctionalities"/>
+                <attribute attribute-id="sendcloudSenderAddressID"/>
+                <attribute attribute-id="sendcloudParcelHandoverDate"/>
+                <attribute attribute-id="sendcloudParcelHandoverDateFormatted"/>
+                <attribute attribute-id="sendcloudDeliveryDate"/>
+                <attribute attribute-id="sendcloudDeliveryDateFormatted"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="ShippingMethod">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="sendcloudCheckout">
+                <display-name xml:lang="x-default">Is Sendcloud Checkout delivery method?</display-name>
+                <description xml:lang="x-default">Indicates if this shipping method was created based on the Sendcloud Checkout configuration.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudDeliveryMethodJson">
+                <display-name xml:lang="x-default">Sendcloud delivery method details</display-name>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudServicePoints">
+                <display-name xml:lang="x-default">Is Sendcloud ServicePoint delivery method?</display-name>
+                <description xml:lang="x-default">Indicates if this shipping method is used to choose a service point using the Sendcloud API.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Sendcloud">
+                <display-name xml:lang="x-default">Sendcloud Settings</display-name>
+                <attribute attribute-id="sendcloudCheckout" />
+                <attribute attribute-id="sendcloudDeliveryMethodJson" />
+                <attribute attribute-id="sendcloudServicePoints" />
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="sendcloudCheckoutImportShippingMethods">
+                <display-name xml:lang="x-default">Import checkout shipping methods?</display-name>
+                <description xml:lang="x-default">This can be disabled on production if the checkout configuration should be imported on staging and then replicated to production.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudCheckoutShippingMethodDefaultEnabled">
+                <display-name xml:lang="x-default">Enable new checkout shipping methods?</display-name>
+                <description xml:lang="x-default">When new shipping methods are imported from Sendcloud Checkout this value indicates if these will be enabled or disabled.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudLogApiOrderNotes">
+                <display-name xml:lang="x-default">Log Sendcloud API communication as notes on the orders.</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudMaxFailedAttempts">
+                <display-name xml:lang="x-default">Maximum number of failed export attempts to Sendcloud.</display-name>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>3</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudNotificationPassword">
+                <display-name xml:lang="x-default">Sendcloud webhook password</display-name>
+                <description xml:lang="x-default">Use the storefront password when storefront protection is enabled. Changing this will require to re-establish the connection to Sendcloud.</description>
+                <type>password</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <field-length>0</field-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudNotificationUsername">
+                <display-name xml:lang="x-default">Sendcloud webhook username</display-name>
+                <description xml:lang="x-default">Use 'storefront' when storefront protection is enabled. Changing this will require to re-establish the connection to Sendcloud.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-length>0</field-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudPointPickerDefaultCountry">
+                <display-name xml:lang="x-default">Sendcloud service point picker: default country</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>nl</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="sendcloudPointPickerDefaultLocale">
+                <display-name xml:lang="x-default">Sendcloud service point picker: default UI language</display-name>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">English (US)</display>
+                        <value>en-us</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">English (UK)</display>
+                        <value>en-gb</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Dutch</display>
+                        <value>nl-nl</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">French</display>
+                        <value>fr-fr</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">German</display>
+                        <value>de-de</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Italian</display>
+                        <value>it-it</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Spanish</display>
+                        <value>es-es</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Sendcloud">
+                <display-name xml:lang="x-default">Sendcloud Settings</display-name>
+                <attribute attribute-id="sendcloudCheckoutImportShippingMethods"/>
+                <attribute attribute-id="sendcloudCheckoutShippingMethodDefaultEnabled"/>
+                <attribute attribute-id="sendcloudMaxFailedAttempts"/>
+                <attribute attribute-id="sendcloudLogApiOrderNotes"/>
+                <attribute attribute-id="sendcloudNotificationUsername" />
+                <attribute attribute-id="sendcloudNotificationPassword" />
+                <attribute attribute-id="sendcloudPointPickerDefaultCountry" />
+                <attribute attribute-id="sendcloudPointPickerDefaultLocale" />
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+</metadata>

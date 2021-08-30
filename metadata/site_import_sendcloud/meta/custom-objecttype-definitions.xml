@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <custom-type type-id="SendcloudConnection">
+        <display-name xml:lang="x-default">Sendcloud connection</display-name>
+        <description xml:lang="x-default">Stores credentials and other connection details for Sendcloud.</description>
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="ID">
+            <display-name xml:lang="x-default">ID</display-name>
+            <type>string</type>
+            <min-length>0</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="allowNewIntegration">
+                <display-name xml:lang="x-default">Allow new integration</display-name>
+                <description xml:lang="x-default">Used to temporarily accept webhook notifications to establish a new integration.</description>
+                <type>enum-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Disabled</display>
+                        <value>DISABLED</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Enabled until the next time the notification job runs</display>
+                        <value>ENABLED_UNTIL_NEXT_JOB_RUN</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Enabled until the integration is established</display>
+                        <value>ENABLED_UNTIL_INTEGRATION_ESTABLISHED</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="integrationID">
+                <display-name xml:lang="x-default">Integration ID</display-name>
+                <type>int</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="publicKey">
+                <display-name xml:lang="x-default">Public key</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="secretKey">
+                <display-name xml:lang="x-default">Secret key</display-name>
+                <type>password</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="servicePointEnabled">
+                <display-name xml:lang="x-default">Enable the service point picker.</display-name>
+                <type>boolean</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="servicePointCarriers">
+                <display-name xml:lang="x-default">The carrier(s) for the service point picker.</display-name>
+                <type>set-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="sendcloud">
+                <display-name xml:lang="x-default">Sendcloud credentials</display-name>
+                <attribute attribute-id="ID"/>
+                <attribute attribute-id="integrationID"/>
+                <attribute attribute-id="servicePointEnabled"/>
+                <attribute attribute-id="servicePointCarriers"/>
+                <attribute attribute-id="publicKey"/>
+                <attribute attribute-id="secretKey"/>
+                <attribute attribute-id="allowNewIntegration"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
+    <custom-type type-id="SendcloudNotification">
+        <display-name xml:lang="x-default">Sendcloud notification</display-name>
+        <description xml:lang="x-default">Stores webhook notifications from Sendcloud.</description>
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <retention-days>14</retention-days>
+        <key-definition attribute-id="ID">
+            <display-name xml:lang="x-default">ID</display-name>
+            <type>string</type>
+            <min-length>0</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="message">
+                <display-name xml:lang="x-default">Message JSON</display-name>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="timestamp">
+                <display-name xml:lang="x-default">Timestamp</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="processStatus">
+                <display-name xml:lang="x-default">Process status</display-name>
+                <type>enum-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">New</display>
+                        <value>NEW</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Retry</display>
+                        <value>RETRY</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Error</display>
+                        <value>ERROR</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="sendcloud">
+                <display-name xml:lang="x-default">Sendcloud notification</display-name>
+                <attribute attribute-id="ID"/>
+                <attribute attribute-id="message"/>
+                <attribute attribute-id="timestamp"/>
+                <attribute attribute-id="processStatus"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
+</metadata>

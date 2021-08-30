@@ -1,0 +1,13 @@
+<isset name="sendcloudCheckoutFields" value="${pdict.forms.shippingForm.sendcloudCheckout}" scope="page" />
+
+<div class="sendcloud-checkout">
+    <div class="form-group
+        ${sendcloudCheckoutFields.sendcloudCheckoutPayload.mandatory === true ? 'required' : ''}
+        ${sendcloudCheckoutFields.sendcloudCheckoutPayload.htmlName}">
+        <input type="hidden" class="form-control payload-field" id="payload-field"
+            value="${sendcloudCheckoutFields.sendcloudCheckoutPayload.htmlValue || ''}" <isprint value="${sendcloudCheckoutFields.sendcloudCheckoutPayload.attributes}" encoding="off"/>
+        >
+    </div>
+    <div class="render-container">
+    </div>
+</div>

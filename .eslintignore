@@ -1,0 +1,3 @@
+# this file uses E4X which Lint cannot parse
+/cartridges/int_sendcloud/cartridge/scripts/helpers/sendcloudE4XHelpers.js
+/cartridges/int_sendcloud/cartridge/static/*

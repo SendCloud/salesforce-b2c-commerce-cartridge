@@ -1,0 +1,34 @@
+<isdecorate template="application/MenuFrame">
+    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tbody>
+            <tr>
+                <td class="table_title aldi" width="100%" nowrap="nowrap">${Resource.msg('connect.title', 'sendcloud', null)}</td>
+            </tr>
+            <tr>
+                <td class="w e s"></td>
+            </tr>
+        </tbody>
+    </table>
+    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tbody>
+            <tr>
+                <td class="table_title_description">
+                    <isif condition="${pdict.sendcloud.isConnected}">
+                        <p>${Resource.msg('connect.p1.connected.start', 'sendcloud', null)} <a href="${pdict.sendcloud.integrationURL}" target="_blank" rel="noreferrer">${Resource.msg('connect.p1.connected.link', 'sendcloud', null)}</a>${Resource.msg('connect.p1.connected.end', 'sendcloud', null)}</p>
+                        <p>${Resource.msg('connect.p2.connected', 'sendcloud', null)} ${Resource.msg('connect.p2.explanation', 'sendcloud', null)}</p>
+                    <iselse/>
+                        <p>${Resource.msg('connect.p1.notconnected', 'sendcloud', null)}</p>
+                        <p>${Resource.msg('connect.p2.notconnected', 'sendcloud', null)} ${Resource.msg('connect.p2.explanation', 'sendcloud', null)}</p>
+                    </isif>
+                    <isif condition="${!pdict.sendcloud.notificationAuthenticationConfigured}">
+                        <p><div class="dw-nc-message dw-nc-message-warning">${Resource.msg('connect.p4.authentication.warning', 'sendcloud', null)}</div></p>
+                    </isif>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form action="${URLUtils.url('SendcloudConnect-Redirect')}" method="post" target="_blank">
+        <button type="submit">${Resource.msg('connect.action', 'sendcloud', null)}</button>
+    </form>
+</isdecorate>

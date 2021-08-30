@@ -1,0 +1,60 @@
+<isset name="sendcloudFields" value="${pdict.forms.shippingForm.shippingAddress.sendcloudPointPicker}" scope="page" />
+
+<div class="sendcloud-point-picker-panel ${shippingModel.selectedShippingMethod.sendcloudServicePointMethod ? 'd-block' : 'd-none'}">
+    <div class="panel-heading mt-3 mb-2">
+        <h5>${Resource.msg('shipping.pointipcker.heading', 'pointpicker', null)}</h5>
+    </div>
+    <div class="panel-body">
+        <input class="sendcloud-api-key" type="hidden" value="${pdict.sendcloudApiKey}">
+        <input class="sendcloud-picker-country" type="hidden" value="${pdict.pointPickerCountry}">
+        <input class="sendcloud-picker-language" type="hidden" value="${pdict.pointPickerLocale}">
+
+        <div class="form-group
+            ${sendcloudFields.sendcloudServicePointData.mandatory === true ? 'required' : ''}
+            ${sendcloudFields.sendcloudServicePointData.htmlName}">
+            <input type="hidden" class="form-control sendcloud-service-point-data" id="sendcloud-service-point-data"
+                value="${sendcloudFields.sendcloudServicePointData.htmlValue || ''}" <isprint value="${sendcloudFields.sendcloudServicePointData.attributes}" encoding="off"/>
+            >
+        </div>
+
+        <div class="point-address-container d-none">
+            <isinclude template="checkout/shipping/sendcloudPointPickerAddress" sf-toolkit="on" />
+        </div>
+
+        <div class="form-group
+            ${sendcloudFields.sendcloudServicePointPostalCode.mandatory === true ? 'required' : ''}
+            ${sendcloudFields.sendcloudServicePointPostalCode.htmlName}">
+            <input type="hidden" class="form-control sendcloud-postal-code" id="sendcloud-postal-code"
+                value="${sendcloudFields.sendcloudServicePointPostalCode.htmlValue || ''}" <isprint value="${sendcloudFields.sendcloudServicePointPostalCode.attributes}" encoding="off"/>>
+            <div class="invalid-feedback"><isprint value="${sendcloudFields.sendcloudServicePointPostalCode.error}" ></div>
+        </div>
+
+        <div class="form-group
+            ${sendcloudFields.sendcloudServicePointId.mandatory === true ? 'required' : ''}
+            ${sendcloudFields.sendcloudServicePointId.htmlName}">
+            <input type="hidden" class="form-control sendcloud-service-point-id" id="sendcloud-service-point-id"
+                value="${sendcloudFields.sendcloudServicePointId.htmlValue || ''}" <isprint value="${sendcloudFields.sendcloudServicePointId.attributes}" encoding="off"/>>
+            <div class="invalid-feedback"><isprint value="${sendcloudFields.sendcloudServicePointId.error}" ></div>
+        </div>
+
+        <isif condition="${sendcloudFields.hasOwnProperty('sendcloudPostNumber')}">
+            <div class="form-group
+                ${sendcloudFields.sendcloudPostNumber.mandatory === true ? 'required' : ''}
+                ${pdict.selectedCountry === 'de' ? 'd-block' : 'd-none'}
+                ${sendcloudFields.sendcloudPostNumber.htmlName}">
+                <input type="hidden" class="form-control sendcloud-service-point-post-number" id="sendcloud-service-point-post-number"
+                    value="${sendcloudFields.sendcloudPostNumber.htmlValue || ''}" <isprint value="${sendcloudFields.sendcloudPostNumber.attributes}" encoding="off"/>
+                >
+                <div class="invalid-feedback"><isprint value="${sendcloudFields.sendcloudPostNumber.error}"></div>
+            </div>
+        </isif>
+
+        <div class="form-group">
+            <div class="mt-4 col-sm-offset-2">
+                <button type="button" class="form-control btn btn-primary point-picker-btn">
+                    ${Resource.msg('shipping.pointpicker.button.select', 'pointpicker', null)}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

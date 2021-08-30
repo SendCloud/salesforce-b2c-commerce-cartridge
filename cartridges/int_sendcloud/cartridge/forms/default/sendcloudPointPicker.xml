@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19" secure="false">
+    <field formid="sendcloudServicePointPostalCode" label="label.input.sendcloudservicepointpostalnumber" type="string" mandatory="false"/>
+    <field formid="sendcloudServicePointId" label="label.input.sendcloudservicepointid" type="integer" mandatory="false"/>
+    <field formid="sendcloudPostNumber" label="label.input.sendcloudpostnumber" type="string" mandatory="false"/>
+    <field formid="sendcloudServicePointData" type="string" mandatory="false"/>
+</form>

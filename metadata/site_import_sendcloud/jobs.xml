@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01">
+    <job job-id="Sendcloud - export orders" priority="0">
+        <description>Exports orders to Sendcloud.</description>
+        <parameters/>
+        <flow>
+            <context site-id="RefArch"/>
+            <step step-id="exportOrdersToSendcloud" type="custom.Sendcloud.ExportOrders" enforce-restart="false">
+                <description>Sends all previously exported orders to Sendcloud.</description>
+                <parameters>
+                    <parameter name="disabled">false</parameter>
+                    <parameter name="orderAgeDaysLimit">30</parameter>
+                    <parameter name="batchSize">10</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-recurring enabled="true">
+                <recurrence>
+                    <date-from>2021-01-01Z</date-from>
+                    <start-time>00:01:00.000Z</start-time>
+                    <interval>5m</interval>
+                    <day-of-week>
+                        <weekday>Monday</weekday>
+                        <weekday>Tuesday</weekday>
+                        <weekday>Wednesday</weekday>
+                        <weekday>Thursday</weekday>
+                        <weekday>Friday</weekday>
+                        <weekday>Saturday</weekday>
+                        <weekday>Sunday</weekday>
+                    </day-of-week>
+                </recurrence>
+            </run-recurring>
+        </triggers>
+    </job>
+
+    <job job-id="Sendcloud - process notifications" priority="0">
+        <description>Processes the Sendcloud notifications.</description>
+        <parameters/>
+        <flow>
+            <context site-id="RefArch"/>
+            <step step-id="process-notifications" type="custom.Sendcloud.ProcessNotifications" enforce-restart="false">
+                <description>Processes the Sendcloud notification queue.</description>
+                <parameters>
+                    <parameter name="disabled">false</parameter>
+                </parameters>
+                <rules>
+                    <on-exit status="UPDATE_CHECKOUT_CONFIGURATION">
+                        <continue/>
+                    </on-exit>
+                    <on-exit status="*">
+                        <stop-job/>
+                    </on-exit>
+                </rules>
+            </step>
+            <step step-id="export-existing-shipping-methods" type="ExportShippingMethods" enforce-restart="false">
+                <description>Exports the existing shipping methods.</description>
+                <parameters>
+                    <parameter name="ExportFile">sendcloud/RefArch/allshipping_existing</parameter>
+                    <parameter name="OverwriteExportFile">true</parameter>
+                </parameters>
+            </step>
+            <step step-id="generate-sendcloud-shipping-xml" type="custom.Sendcloud.GenerateSendcloudShippingXml" enforce-restart="false">
+                <description>Generatess new XML files: one with new and updates shipping methods and one with only the Sendcloud shipping methods that should be deleted.</description>
+                <parameters>
+                    <parameter name="disabled">false</parameter>
+                    <parameter name="exportFolderPath">sendcloud/RefArch</parameter>
+                    <parameter name="existingShippingFileName">allshipping_existing.xml</parameter>
+                    <parameter name="newShippingFileName">sendcloudshipping_new.xml</parameter>
+                    <parameter name="deleteShippingFileName">sendcloudshipping_todelete.xml</parameter>
+                </parameters>
+            </step>
+            <step step-id="remove-sendcloud-shipping-methods" type="ImportShippingMethods" enforce-restart="false">
+                <description>Removes the Sendcloud shipping methods that are no longer configured.</description>
+                <parameters>
+                    <parameter name="WorkingFolder">sendcloud/RefArch</parameter>
+                    <parameter name="FileNamePattern">sendcloudshipping_todelete.xml</parameter>
+                    <parameter name="NoFilesFoundHandling">NO_FILES_FOUND</parameter>
+                    <parameter name="ImportMode">Delete</parameter>
+                    <parameter name="ImportFailedHandling">ERROR</parameter>
+                    <parameter name="AfterImportFileHandling">Archive</parameter>
+                    <parameter name="ArchiveFolder">src/sendcloud/RefArch/archive</parameter>
+                </parameters>
+            </step>
+            <step step-id="import-new-sendcloud-shipping-methods" type="ImportShippingMethods" enforce-restart="false">
+                <description>Import the new Sendcloud Checkout shipping methods if present.</description>
+                <parameters>
+                    <parameter name="WorkingFolder">sendcloud/RefArch</parameter>
+                    <parameter name="FileNamePattern">sendcloudshipping_new.xml</parameter>
+                    <parameter name="NoFilesFoundHandling">NO_FILES_FOUND</parameter>
+                    <parameter name="ImportMode">Merge</parameter>
+                    <parameter name="ImportFailedHandling">ERROR</parameter>
+                    <parameter name="AfterImportFileHandling">Archive</parameter>
+                    <parameter name="ArchiveFolder">src/sendcloud/RefArch/archive</parameter>
+                </parameters>
+            </step>
+            <step step-id="status-from-context" type="custom.Sendcloud.StatusFromContext" enforce-restart="false">
+                <description>Returns the status from the job execution context, which was set by the 'process-notifications' step..</description>
+                <parameters/>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-recurring enabled="true">
+                <recurrence>
+                    <date-from>2021-01-01Z</date-from>
+                    <start-time>00:02:00.000Z</start-time>
+                    <interval>5m</interval>
+                    <day-of-week>
+                        <weekday>Monday</weekday>
+                        <weekday>Tuesday</weekday>
+                        <weekday>Wednesday</weekday>
+                        <weekday>Thursday</weekday>
+                        <weekday>Friday</weekday>
+                        <weekday>Saturday</weekday>
+                        <weekday>Sunday</weekday>
+                    </day-of-week>
+                </recurrence>
+            </run-recurring>
+        </triggers>
+    </job>
+
+</jobs>
