@@ -17,7 +17,7 @@
     "lint:isml": "./node_modules/.bin/isml-linter",
     "test": "sgmf-scripts --test test/unit/**/*.js",
     "uploadCartridge": "sgmf-scripts --uploadCartridge int_sendcloud && sgmf-scripts --uploadCartridge bm_sendcloud",
-    "setup": "npm install && npm run compile",
+    "setup": "npm install && npm run compile:js",
     "build": "npm run compile:js",
     "compile:js": "sgmf-scripts --compile js",
     "watch": "sgmf-scripts --watch --onlycompile",

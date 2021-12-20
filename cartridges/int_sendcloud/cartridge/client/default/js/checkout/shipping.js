@@ -283,7 +283,7 @@ function updateShippingSummaryInformation(shipping, order) {
         var selectedShippingMethod = shipping.selectedShippingMethod;
         var isGift = shipping.isGift;
         // If shipping method is point picker we show address of the pick up point instead of customer address
-        if (shipping.selectedShippingMethod.sendcloudServicePointMethod) {
+        if (selectedShippingMethod && selectedShippingMethod.sendcloudServicePointMethod) {
             address = servicePointPicker.createPointAddressObject();
         }
 

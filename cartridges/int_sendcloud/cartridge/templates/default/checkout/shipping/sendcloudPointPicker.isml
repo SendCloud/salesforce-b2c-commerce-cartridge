@@ -1,6 +1,6 @@
 <isset name="sendcloudFields" value="${pdict.forms.shippingForm.shippingAddress.sendcloudPointPicker}" scope="page" />
 
-<div class="sendcloud-point-picker-panel ${shippingModel.selectedShippingMethod.sendcloudServicePointMethod ? 'd-block' : 'd-none'}">
+<div class="sendcloud-point-picker-panel ${shippingModel.selectedShippingMethod && shippingModel.selectedShippingMethod.sendcloudServicePointMethod ? 'd-block' : 'd-none'}">
     <div class="panel-heading mt-3 mb-2">
         <h5>${Resource.msg('shipping.pointipcker.heading', 'pointpicker', null)}</h5>
     </div>

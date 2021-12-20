@@ -38,6 +38,51 @@
         </group-definitions>
     </type-extension>
 
+    <type-extension type-id="OrderAddress">
+        <system-attribute-definitions>
+            <attribute-definition attribute-id="countryCode">
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">United States</display>
+                        <value>US</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">France</display>
+                        <value>FR</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Italy</display>
+                        <value>IT</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Japan</display>
+                        <value>JP</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">China</display>
+                        <value>CN</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">United Kingdom</display>
+                        <value>GB</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Netherlands</display>
+                        <value>NL</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Belgium</display>
+                        <value>BE</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Germany</display>
+                        <value>DE</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+        </system-attribute-definitions>
+    </type-extension>
+
     <type-extension type-id="Product">
         <custom-attribute-definitions>
             <attribute-definition attribute-id="countryOfOrigin">

@@ -1,15 +1,14 @@
-var apiKey = $('.sendcloud-api-key').get(0).value;
-
-    /**
-     * Opens the point picker with the selected specification
-     * @param {string} country - required; ISO-2 code of the country you want to display the map (i.e.: NL, BE, DE, FR)
-     * @param {?string} language  - not required. Defaults to "en-us"
-     * @param {?string} postalCode  - not required but recommended
-     * @param {?string} carriers - comma-separated list of carriers you can filter service points
-     * @param {?string|?number} servicePointId - set a preselected service point to be shown upon displaying the map
-     * @param {?string} postNumber - set a pre-defined post number to fill its corresponding field upon displaying the map
-     */
+/**
+ * Opens the point picker with the selected specification
+ * @param {string} country - required; ISO-2 code of the country you want to display the map (i.e.: NL, BE, DE, FR)
+ * @param {?string} language  - not required. Defaults to "en-us"
+ * @param {?string} postalCode  - not required but recommended
+ * @param {?string} carriers - comma-separated list of carriers you can filter service points
+ * @param {?string|?number} servicePointId - set a preselected service point to be shown upon displaying the map
+ * @param {?string} postNumber - set a pre-defined post number to fill its corresponding field upon displaying the map
+ */
 function openServicePointPicker(country, language, postalCode, carriers, servicePointId, postNumber) {
+    var apiKey = $('.sendcloud-api-key').val();
     var config = {
         apiKey: apiKey,
         country: country,
@@ -55,8 +54,7 @@ function openServicePointPicker(country, language, postalCode, carriers, service
 function getCarrierList() {
     var carriers = JSON.parse(
         $('input[name=dwfrm_shipping_shippingAddress_shippingMethodID]:checked')
-        .parent().find('.sendcloud-pointpicker-carriers')
-        .get(0).value
+        .parent().find('.sendcloud-pointpicker-carriers').val()
     );
     return carriers;
 }
