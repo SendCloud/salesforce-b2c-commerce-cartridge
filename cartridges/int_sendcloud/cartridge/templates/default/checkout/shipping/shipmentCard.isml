@@ -4,7 +4,7 @@
           ? URLUtils.url('CheckoutAddressServices-AddNewAddress')
           : URLUtils.url('CheckoutShippingServices-SubmitShipping')}"
           data-address-mode="${shippingModel.matchingAddressId ? 'edit' : 'new'}"
-          <isprint value=${pdict.forms.shippingForm.attributes} encoding="off"/>
+          <isprint value=${pdict.forms.shippingForm.attributes} encoding="htmlsinglequote"/>
     >
         <isif condition="${lineItem}">
             <input name="productLineItemUUID" type="hidden" value="${lineItem.UUID}" />
@@ -24,6 +24,7 @@
 
             <fieldset class="shipping-method-block">
                 <h3>${Resource.msg('heading.shipping.method', 'checkout', null)}</h3>
+
                 <isinclude template="checkout/shipping/shippingMethod" />
             </fieldset>
 

@@ -4,9 +4,7 @@
     <div class="form-group
         ${sendcloudCheckoutFields.sendcloudCheckoutPayload.mandatory === true ? 'required' : ''}
         ${sendcloudCheckoutFields.sendcloudCheckoutPayload.htmlName}">
-        <input type="hidden" class="form-control payload-field" id="payload-field"
-            value="${sendcloudCheckoutFields.sendcloudCheckoutPayload.htmlValue || ''}" <isprint value="${sendcloudCheckoutFields.sendcloudCheckoutPayload.attributes}" encoding="off"/>
-        >
+        <input type="hidden" class="form-control payload-field" id="payload-field" <isprint value="${sendcloudCheckoutFields.sendcloudCheckoutPayload.attributes}" encoding="htmlsinglequote"/>>
     </div>
     <div class="render-container">
     </div>

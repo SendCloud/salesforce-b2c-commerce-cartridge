@@ -88,7 +88,7 @@ describe('sendcloudNotificationHelpers', function () {
             }
         },
         'dw/order/OrderMgr': {
-            getOrder: function () {
+            searchOrder: function () {
                 return order;
             }
         },

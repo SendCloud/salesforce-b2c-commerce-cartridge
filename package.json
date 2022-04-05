@@ -1,6 +1,6 @@
 {
   "name": "sendcloud",
-  "version": "21.1.0",
+  "version": "22.1.0",
   "description": "Sendcloud SFRA cartridge",
   "packageName": "int_sendcloud",
   "main": "index.js",
@@ -16,6 +16,7 @@
     "lint:js": "sgmf-scripts --lint js",
     "lint:isml": "./node_modules/.bin/isml-linter",
     "test": "sgmf-scripts --test test/unit/**/*.js",
+    "test:integration": "sgmf-scripts --integration 'test/integration/**/*.js'",
     "uploadCartridge": "sgmf-scripts --uploadCartridge int_sendcloud && sgmf-scripts --uploadCartridge bm_sendcloud",
     "setup": "npm install && npm run compile:js",
     "build": "npm run compile:js",
@@ -27,6 +28,7 @@
     "node": ">=4.0"
   },
   "devDependencies": {
+    "@tridnguyen/config": "^2.3.1",
     "chai": "^3.5.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^5.0.3",
