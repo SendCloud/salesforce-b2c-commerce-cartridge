@@ -173,7 +173,7 @@ function processParcelStatusChangedNotification(notification) {
     }
 
     var OrderMgr = require('dw/order/OrderMgr');
-    var order = OrderMgr.searchOrder('orderNo={0} AND custom.sendcloudExportStatus = {1}', null, parcelData.order_number, 'EXPORTED');
+    var order = OrderMgr.searchOrder('orderNo={0} AND custom.sendcloudExportStatus = {1}', parcelData.order_number, 'EXPORTED');
     if (!order) {
         sendcloudLog.warn('Notification of type \'parcel_status_changed\' is received with an unknown order_number: {0}', parcelData.order_number);
         return {
