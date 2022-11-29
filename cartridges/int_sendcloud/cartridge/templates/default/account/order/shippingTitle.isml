@@ -2,8 +2,8 @@
 
 <isif condition="${order.trackingNumber}">
     <p>${Resource.msg('label.orderhistory.trackingcode','sendcloud',null)}
-        <isif condition="${order.tracklingLink}">
-            <a href="${order.tracklingLink}" target="_blank">${order.trackingNumber}</a>
+        <isif condition="${order.trackingLink}">
+            <a href="${order.trackingLink}" target="_blank">${order.trackingNumber}</a>
         <iselse/>
             ${order.trackingNumber}
         </isif>

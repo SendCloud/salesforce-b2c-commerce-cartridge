@@ -45,6 +45,13 @@ function openServicePointPicker(country, language, postalCode, carriers, service
          */
         function () {}
     );
+    const mapContainer = $('#sendcloudshipping_service_point_map').parent();
+    const backdrop = mapContainer.next();
+    var element = $('#sendcloudshipping_service_point_map').detach();
+    $('.map-container').append(element);
+    $('.map-container').css('height', '650px');
+    mapContainer.remove();
+    backdrop.remove();
 }
 
 /**

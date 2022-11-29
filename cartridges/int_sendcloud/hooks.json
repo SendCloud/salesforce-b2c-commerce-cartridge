@@ -1,0 +1,8 @@
+{
+    "hooks": [
+        {
+            "name": "dw.order.calculateShipping",
+            "script": "./cartridge/scripts/hooks/cart/sendcloudCalculate.js"
+        }
+    ]
+}

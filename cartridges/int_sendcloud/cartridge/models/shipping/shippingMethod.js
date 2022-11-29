@@ -2,9 +2,43 @@
 
 var Calendar = require('dw/util/Calendar');
 var Site = require('dw/system/Site');
+var StringUtils = require('dw/util/StringUtils');
+
+var shippingHelpers = require('*/cartridge/scripts/checkout/shippingHelpers');
 
 var base = module.superModule;
 var dayKeys = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+
+/**
+ * Checks if the current date is a holiday
+ * @param {Array} holidayDates - array of holidays
+ * @param {dw.util.Calendar} date - current date
+ * @returns {boolean} - true if the current date is a holiday, false otherwise
+ */
+function isHoliday(holidayDates, date) {
+    if (!holidayDates || !holidayDates.length) {
+        return false;
+    }
+
+    for (var i = 0; i < holidayDates.length; i++) {
+        var holidayObj = holidayDates[i];
+
+        var holidayFromDate = new Calendar(new Date(holidayObj.from_date));
+        var holidayToDate = new Calendar(new Date(holidayObj.to_date));
+
+        if (holidayObj.recurring && holidayObj.frequency === 'yearly' && holidayFromDate.get(Calendar.YEAR) < date.get(Calendar.YEAR)) {
+            var yearDifference = date.get(Calendar.YEAR) - holidayFromDate.get(Calendar.YEAR);
+            holidayFromDate.add(Calendar.YEAR, yearDifference);
+            holidayToDate.add(Calendar.YEAR, yearDifference);
+        }
+
+        if (holidayFromDate.before(date) && date.before(holidayToDate)) {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 /**
  * Checks if same-day delivery is applicable at the current day and time.
@@ -32,6 +66,10 @@ function isSameDayDeliveryApplicable(sendcloudDeliveryMethod) {
 
     // check if cut-off time for handing over parcels on this date is in the past
     if (cutOffDate.before(deliveryDate)) return false;
+
+    // check if the current date is a holiday
+    var holidays = sendcloudDeliveryMethod.holidays && sendcloudDeliveryMethod.holidays.enabled && sendcloudDeliveryMethod.holidays.holiday_dates ? sendcloudDeliveryMethod.holidays.holiday_dates : [];
+    if (isHoliday(holidays, cutOffDate)) return false;
 
     return true;
 }
@@ -102,9 +140,10 @@ function getDeliveryLocaleData() {
 
 /**
  * Plain JS object that represents a DW Script API dw.order.ShippingMethod object
- * @param {dw.order.ShippingMethod} shippingMethod - the default shipment of the current basket
+ * @param {dw.order.ShippingMethod} shippingMethod - the shipping method of the current basket
+ * @param {dw.order.Shipment} shipment - Any shipment for the current basket
  */
-function ShippingMethodModel(shippingMethod) {
+function ShippingMethodModel(shippingMethod, shipment) {
     // call base constructor
     if (base) base.apply(this, arguments);
 
@@ -125,10 +164,19 @@ function ShippingMethodModel(shippingMethod) {
         this.sendcloudDeliveryMethodJson = shippingMethod.custom.sendcloudDeliveryMethodJson;
         this.sendcloudLocaleData = getDeliveryLocaleData();
 
-        if (this.sendcloudDeliveryMethod.delivery_method_type === 'same_day_delivery') {
-            this.applicable = isSameDayDeliveryApplicable(this.sendcloudDeliveryMethod);
-        } else if (this.sendcloudDeliveryMethod.delivery_method_type === 'standard_delivery') {
-            this.applicable = isStandardDeliveryApplicable(this.sendcloudDeliveryMethod);
+        var isSendcloudShippingMethodApplicable = shippingHelpers.isSendcloudShippingMethodApplicable(this.sendcloudDeliveryMethod, shipment);
+        if (isSendcloudShippingMethodApplicable) {
+            if (this.sendcloudDeliveryMethod.delivery_method_type === 'same_day_delivery') {
+                this.applicable = isSameDayDeliveryApplicable(this.sendcloudDeliveryMethod);
+            } else if (this.sendcloudDeliveryMethod.delivery_method_type === 'standard_delivery') {
+                this.applicable = isStandardDeliveryApplicable(this.sendcloudDeliveryMethod);
+            }
+
+            // Create the method in the sendcloud helpers and call it here to set the shipping costs
+            var sendcloudShippingRate = shippingHelpers.getSendcloudShippingRate(this.sendcloudDeliveryMethod, shippingMethod, shipment);
+            this.shippingCost = StringUtils.formatMoney(sendcloudShippingRate);
+        } else {
+            this.applicable = false;
         }
     }
 

@@ -114,6 +114,10 @@ function updateShippingAddressFormValues(shipping) {
         };
     }
 
+    if (jQuery.isEmptyObject(addressObject)) {
+        return;
+    }
+
     addressObject.isGift = shipping.isGift;
     addressObject.giftMessage = shipping.giftMessage;
 
