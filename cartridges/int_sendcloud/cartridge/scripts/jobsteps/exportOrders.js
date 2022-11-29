@@ -36,7 +36,8 @@ function exportOrders(parameters) {
             var shipment = shipments.next();
 
             // skip shipments without an address, as Sendcloud is only for shipping to physical addresses
-            if (shipment.shippingAddress) {
+            // skip shipments that do not use Sendcloud shipping method
+            if (shipment.shippingAddress && (shipment.custom.sendcloudServicePointId || shipment.custom.sendcloudDeliveryMethodType)) {
                 var key = order.orderNo + '-' + shipment.ID;    // same format as in models/sendcloud/decorators/base
                 orderBatch[key] = { order: order, shipment: shipment };
                 orderBatchSize++;

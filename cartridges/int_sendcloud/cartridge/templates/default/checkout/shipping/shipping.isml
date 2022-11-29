@@ -1,6 +1,5 @@
 <script type="text/javascript" src="https://embed.sendcloud.sc/spp/1.0.0/api.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@sendcloud/checkout-plugin-ui@1/dist/checkout-plugin-ui.js" defer></script>
-
+<script src="https://cdn.jsdelivr.net/npm/@sendcloud/checkout-plugin-ui@^2.0.0/dist/checkout-plugin-ui-loader.js" type="module" defer></script>
 <isscript>
     var assets = require('*/cartridge/scripts/assets.js');
     assets.addJs('/js/sendcloud.js');

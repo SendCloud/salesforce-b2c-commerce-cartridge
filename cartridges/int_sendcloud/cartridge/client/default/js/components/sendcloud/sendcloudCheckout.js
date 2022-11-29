@@ -11,8 +11,10 @@ function renderShippingOption(deliveryMethodData, deliveryMethodLocaleData) {
         var locale = deliveryMethodLocaleData.locale;
         var localeMessages = deliveryMethodLocaleData.localeMessages;
         var deliveryMethod = deliveryMethodData;
+        var renderDate = new Date();
+
         try {
-            window.renderScShippingOption({ mountElement, deliveryMethod, locale, localeMessages });
+            window.renderScShippingOption({ mountElement, deliveryMethod, renderDate, locale, localeMessages });
         } catch (error) {} // eslint-disable-line
     }
 }
@@ -24,14 +26,16 @@ $(document).ready(function () {
         }, false);
     }
 
-    var selectedShippingOption = $('.nominated-day-delivery').parent().children('.form-check-input:checked');
-    if (selectedShippingOption.length) {
-        var deliveryMethodDataJSON = $(selectedShippingOption).parent().children('.sendcloud-checkout-shipmethod-data').get(0).value;
-        var deliveryMethodLocaleDataJSON = $(selectedShippingOption).parent().children('.sendcloud-checkout-shipmethod-localedata').get(0).value;
-        var deliveryMethodData = JSON.parse(deliveryMethodDataJSON);
-        var deliveryMethodLocaleData = JSON.parse(deliveryMethodLocaleDataJSON);
-        renderShippingOption(deliveryMethodData, deliveryMethodLocaleData);
-    }
+    window.renderScShippingOptionModule.then(function(data) {
+        var selectedShippingOption = $('.nominated-day-delivery').parent().children('.form-check-input:checked');
+        if (selectedShippingOption.length) {
+            var deliveryMethodDataJSON = $(selectedShippingOption).parent().children('.sendcloud-checkout-shipmethod-data').get(0).value;
+            var deliveryMethodLocaleDataJSON = $(selectedShippingOption).parent().children('.sendcloud-checkout-shipmethod-localedata').get(0).value;
+            var deliveryMethodData = JSON.parse(deliveryMethodDataJSON);
+            var deliveryMethodLocaleData = JSON.parse(deliveryMethodLocaleDataJSON);
+            renderShippingOption(deliveryMethodData, deliveryMethodLocaleData);
+        }
+    });
 });
 
 module.exports = {

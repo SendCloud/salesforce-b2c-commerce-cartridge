@@ -15,7 +15,7 @@
            max-length="50" missing-error="error.message.required" range-error="error.message.between2and50"/>
 
     <!--  postal code -->
-    <field formid="postalCode" label="label.input.zipcode" type="string" mandatory="true" min-length="5" max-length="10"
+    <field formid="postalCode" label="label.input.zipcode" type="string" mandatory="true" min-length="6" max-length="10"
            regexp="[1-9][0-9]{3} ?[A-Za-z]{2}"
            binding="postalCode"
            range-error="error.message.between5and10"

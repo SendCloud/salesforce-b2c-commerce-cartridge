@@ -8,11 +8,11 @@
     <!-- Sendcloud checkout -->
     <include formid="sendcloudCheckout" name="sendcloudCheckout"/>
 
+    <!-- Sendcloud point picker -->
+    <include formid="sendcloudPointPicker" name="sendcloudPointPicker"/>
+
     <!-- form for creating and editing shipping address -->
     <group formid="shippingAddress" form-error="address.invalid" >
-
-        <!-- Sendcloud point picker -->
-        <include formid="sendcloudPointPicker" name="sendcloudPointPicker"/>
 
         <!-- use fields from shipping address definition -->
         <include formid="addressFields" name="address"/>

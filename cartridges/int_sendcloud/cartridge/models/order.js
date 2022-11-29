@@ -18,7 +18,7 @@ function OrderModel(lineItemContainer) {
         if (trackingLinkFormat) {
             var StringUtils = require('dw/util/StringUtils');
             var shippingAddress = lineItemContainer.defaultShipment.shippingAddress;
-            this.tracklingLink = StringUtils.format(trackingLinkFormat, this.trackingNumber, shippingAddress.countryCode.value, shippingAddress.postalCode);
+            this.trackingLink = StringUtils.format(trackingLinkFormat, this.trackingNumber, shippingAddress.countryCode.value, shippingAddress.postalCode);
         }
     }
 }
