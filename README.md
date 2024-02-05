@@ -1,3 +1,7 @@
+# REPOSITORY MOVED
+
+Please note that this repository moved to: [here](https://gitlab.com/sendcloud-public/salesforce-b2c-commerce-cartridge)
+
 # link_sendcloud
 
 ## Summary
